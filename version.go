@@ -1,3 +1,3 @@
-package remotionlambda;
+package lambda_go_sdk;
 
-const VERSION = "3.3.99"
+const VERSION = "3.3.100"
