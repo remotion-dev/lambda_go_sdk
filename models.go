@@ -33,6 +33,7 @@ type RemotionOptions struct {
 	ForceWidth            interface{}            `json:"forceWidth"`
 	BucketName            interface{}            `json:"bucketName"`
 	AudioCodec            interface{}            `json:"audioCodec"`
+	DumpBrowserLogs       bool                   `json:"dumpBrowserLogs"`
 	ForceBucketName       string                 `json:"forceBucketName"`
 	Gl                    string                 `json:"gl"`
 }
@@ -71,16 +72,34 @@ type renderInternalOptions struct {
 	ForceWidth            interface{}            `json:"forceWidth"`
 	BucketName            interface{}            `json:"bucketName"`
 	AudioCodec            interface{}            `json:"audioCodec"`
+	DumpBrowserLogs       bool                   `json:"dumpBrowserLogs"`
 
 	ForceBucketName string  `json:"forceBucketName,omitempty"`
 	Gl              *string `json:"gl,omitempty"`
 }
 
+type RawInvokeResponse struct {
+	StatusCode int `json:"statusCode"`
+	Headers    struct {
+		ContentType string `json:"content-type"`
+	} `json:"headers"`
+	Body string `json:"body"`
+}
+
 type RemotionRenderResponse struct {
-	RenderId          string `json:"renderId"`
-	BucketName        string `json:"bucketName"`
-	CloudWatchLogs    string `json:"cloudWatchLogs"`
-	FolderInS3Console string `json:"folderInS3Console"`
+	StatusCode int `json:"statusCode"`
+	Headers    struct {
+		ContentType string `json:"content-type"`
+	} `json:"headers"`
+	Body struct {
+		BucketName string `json:"bucketName"`
+		RenderId   string `json:"renderId"`
+	} `json:"body"`
+}
+
+type RemotionBodyResponse struct {
+	BucketName string `json:"bucketName"`
+	RenderId   string `json:"renderId"`
 }
 
 type RenderConfig struct {
@@ -94,9 +113,18 @@ type renderProgressInternalConfig struct {
 	RenderId   string `json:"renderId" validate:"required"`
 	BucketName string `json:"bucketName" validate:"required"`
 	Type       string `json:"type" validate:"required"`
+	Version    string `json:"version" validate:"required"`
 }
 
 type RenderProgressResponse struct {
+	StatusCode int `json:"statusCode"`
+	Headers    struct {
+		ContentType string `json:"content-type"`
+	} `json:"headers"`
+	Body RenderProgress `json:"body"`
+}
+
+type RenderProgress struct {
 	OverallProgress          float64         `json:"overallProgress"`
 	Chunks                   int             `json:"chunks"`
 	Done                     bool            `json:"done"`
