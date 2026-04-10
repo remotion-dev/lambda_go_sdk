@@ -114,11 +114,11 @@ func constructRenderInternals(options *RemotionOptions) (*renderInternalOptions,
 		internalParams.MaxRetries = options.MaxRetries
 	}
 
-	if options.Scale == 0 {
-		internalParams.Scale = 1
-	} else {
-		internalParams.Scale = options.Scale
+	sampleRate := 48000
+	if options.SampleRate != 0 {
+		sampleRate = options.SampleRate
 	}
+	internalParams.SampleRate = sampleRate
 
 	if options.ConcurrencyPerLambda == 0 {
 		internalParams.ConcurrencyPerLambda = 1

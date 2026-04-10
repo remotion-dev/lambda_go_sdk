@@ -53,6 +53,7 @@ type RemotionOptions struct {
 	X264Preset                     interface{}            `json:"x264Preset"`
 	DeleteAfter                    *string                `json:"deleteAfter"`
 	IsProduction                   *bool                  `json:"isProduction"`
+	SampleRate                     int                    `json:"sampleRate"`
 }
 
 type renderInternalOptions struct {
@@ -111,6 +112,7 @@ type renderInternalOptions struct {
 	X264Preset                     interface{}            `json:"x264Preset"`
 	DeleteAfter                    *string                `json:"deleteAfter"`
 	IsProduction                   *bool                  `json:"isProduction"`
+	SampleRate                     int                    `json:"sampleRate"`
 }
 
 type RawInvokeResponse struct {
